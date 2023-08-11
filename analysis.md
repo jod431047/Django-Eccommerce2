@@ -13,6 +13,7 @@ Product:
 brand:
 - name 
 - image
+- count: products Calculated
 
 
 
