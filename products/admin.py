@@ -1,6 +1,5 @@
 from django.contrib import admin
-
-# Register your models here.
+from django_summernote.admin import SummernoteModelAdmin
 from .models import Product,ProductImages,Brand,Review
 
 
@@ -10,12 +9,13 @@ class ProductImagesAdmin(admin.TabularInline):
 
 
 
-class ProductAdmin(admin.ModelAdmin):
+class ProductAdmin(SummernoteModelAdmin):
     list_display = ['name','price','brand','flag']
     list_filter = ['name','price','brand','flag']
     search_fields =['name','subtitle','description']
     
     inlines = [ProductImagesAdmin,]
+    summernote_fields = '__all__'
     
     
     
