@@ -35,7 +35,7 @@ def seed_product(n):
           brand = Brand.objects.get(id=random.randint(1,104)) ,
           flag = flag_types[random.randint(0,2)] ,
         )
-    print(f'{n} products Was Created Successfuly...')
+    print(f'{n} product Was Created Successfuly...')
 
 #seed_brand(100)
 seed_product(1993)
