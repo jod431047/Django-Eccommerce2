@@ -19,4 +19,5 @@ def home(request):
         'new_products':new_products,
         'reviews':reviews,
         'brands_sliced' : brands[:6],
+        
     })
