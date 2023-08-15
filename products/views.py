@@ -3,7 +3,9 @@ from django.views import generic
 from .models import Product , ProductImages , Brand,Review
 
 
-
+def post_list_debug(request):
+    data = Product.objects.all()
+    return render(request,'products/debug.html' ,{'data':data})
 
 
 class ProductList(generic.ListView):
