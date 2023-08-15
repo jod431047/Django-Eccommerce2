@@ -4,7 +4,35 @@ from .models import Product , ProductImages , Brand,Review
 
 
 def post_list_debug(request):
-    data = Product.objects.all()
+    
+    
+    
+    # data = Product.objects.all()
+    #data = Product.objects.filter(price=20)
+    #data = Product.objects.filter(price__gt=80)
+    #data = Product.objects.filter(price__gte=80)
+    #data = Product.objects.filter(price__lt=80)
+    #data = Product.objects.filter(price__lte=80)
+    #data = Product.objects.filter(price__range=(24,25))
+    
+    
+    #data = Product.objects.filter(brand__name='Apple')
+    
+    
+    #data = Product.objects.filter(brand__id=1)
+    #data = Product.objects.filter(brand__id__gt=30)
+    #data = Product.objects.filter(name__contains='Sara')
+    #data = Product.objects.filter(name__startswith='Sara')
+    #data = Product.objects.filter(name__endswith='Snyder')
+    #data = Product.objects.filter(video__isnull=True)
+     
+    #data = Review.objects.filter(create_date__year=2023)
+    #data = Review.objects.filter(create_date__month=8)
+    
+    data = Product.objects.filter(price__gt=50,flag='Sale')
+    data = Product.objects.filter(price__gt=50).filter(flag='Sale')
+    
+    
     return render(request,'products/debug.html' ,{'data':data})
 
 
