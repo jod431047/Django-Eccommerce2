@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render , redirect
 from django.views import generic
+from .forms import ReviewForm
 from .models import Product , ProductImages , Brand,Review
 from django.db.models import Q ,F ,Value , Func
 from django.db.models.aggregates import Count,Avg,Sum,Min,Max
@@ -108,11 +109,23 @@ class ProductDetail(generic.DetailView):
     model = Product  
     
     
+def add_review(request,slug):
+    product = Product.objects.get(slug=slug)
+    form = ReviewForm(request.POST)
+    if form.is_valid():
+        myform = form.save(commit=False)
+        myform.user = request.user
+        myform.product = product
+        myform.save()
+        return redirect(f'/products/{product.slug}')
+    
+    
 class BrandList(generic.ListView):
     model = Brand
     paginate_by=50
     def  get_queryset(self):
-        object_list = Brand.objects.annotate(posts_count=Count('product_brand'))
+        object_list = Brand.objects.anno
+        tate(posts_count=Count('product_brand'))
         return object_list
     
     
