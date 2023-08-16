@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from django.views import generic
 from .models import Product , ProductImages , Brand,Review
+from django.db.models import Q ,F ,Value , Func
+from django.db.models.aggregates import Count,Avg,Sum,Min,Max
+
 
 
 def post_list_debug(request):
@@ -29,8 +32,67 @@ def post_list_debug(request):
     #data = Review.objects.filter(create_date__year=2023)
     #data = Review.objects.filter(create_date__month=8)
     
-    data = Product.objects.filter(price__gt=50,flag='Sale')
-    data = Product.objects.filter(price__gt=50).filter(flag='Sale')
+    #data = Product.objects.filter(price__gt=50,flag='Sale')
+    
+    
+
+    #data = Product.objects.filter(
+    #    Q(price__gt=95),
+    #   Q(flag='Sale')
+    # )
+    
+    #data = Product.objects.filter(
+    #    Q(price__gt=95) &
+    #  Q(flag='Sale')
+    #)
+    
+    
+    #data = Product.objects.filter(
+    #   Q(price__gt=95) |
+    #   ~Q(flag='Sale')
+    #)
+    
+    #data = Product.objects.filter(
+    #  Q(price__gt=95) &
+    # Q(flag='Sale')
+    #)
+    
+    #data = Product.objects.filter(sku=F('price'))
+    #data = Product.objects.filter(sku=F('brand__id'))
+    #data = Product.objects.all().order_by('name')   #ASC
+    #data = Product.objects.all().order_by('-name')   #DES
+    #data = Product.objects.order_by('-name')    
+    #data = Product.objects.filter(brand__id=1).order_by('name')
+    #data = Product.objects.order_by('flag','name')   
+    #data = Product.objects.order_by('flag','name')[0]
+    #data = Product.objects.earliest('flag','name')
+    #data = Product.objects.last()
+    #data = Product.objects.all()[:5]
+    #data = Product.objects.all()[5:10]
+    #data = Product.objects.values('name','price','flag','brand__name')
+    #data = Product.objects.values_list('name','price','flag','brand__name')
+    #data = Product.objects.values_list('name','price','flag','brand__name').distinct()
+    #data = Product.objects.only('name','price','flag','brand__name')
+    #data = Product.objects.defer('tags')
+    #data = Product.objects.defer('description')
+    #data = Product.objects.all()
+    
+    # data = Product.objects.select_related('brand').all()    #select_related : one-to-one , one-to-many
+    #data = Product.objects.prefetch_related('brand').all()    #prefetch_related : many-to-many
+    
+    #data = Product.objects.prefetch_related('brand').all() 
+    #data = Product.objects.aggregate(Count('id')) 
+    #data = Product.objects.aggregate(Sum('price')) 
+    #data = Product.objects.aggregate(Max('price')) 
+    #data = Product.objects.aggregate(Min('price'))
+    #data = Product.objects.aggregate(mymin = Min('price'))
+    #data = Product.objects.aggregate(mymin = Min('price'),mycount=Count('id'))
+    
+    #data = Product.objects.annotate(is_new=Value(True))
+    #data = Product.objects.annotate(pric_with_tax=F('price')*1.2)
+    data = Brand.objects.annotate(posts=Count('product_brand'))
+    
+    
     
     
     return render(request,'products/debug.html' ,{'data':data})
