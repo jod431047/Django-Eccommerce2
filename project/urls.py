@@ -23,11 +23,11 @@ from settings.views import home
 
 
 urlpatterns = [
+    path("accounts/", include("django.contrib.auth.urls")),
     path('admin/', admin.site.urls),
     path('products/', include('products.urls',namespace='products')),
     path('',home),
     path("__debug__/", include("debug_toolbar.urls")),
-    
     path('summernote/', include('django_summernote.urls')),
 ]
 

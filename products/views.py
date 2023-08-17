@@ -123,18 +123,17 @@ def add_review(request,slug):
 class BrandList(generic.ListView):
     model = Brand
     paginate_by=50
-    def  get_queryset(self):
-        object_list = Brand.objects.anno
-        tate(posts_count=Count('product_brand'))
+    def get_queryset(self):
+        object_list = Brand.objects.annotate(posts_count=Count('product_brand'))
         return object_list
     
     
     
     
 class BrandDetail(generic.ListView):
-    model = Product  
-    template_name= 'products/brand_detail.html'   
-
+    model = Product
+    template_name = 'products/brand_detail.html'
+    
     def get_queryset(self):
         brand = Brand.objects.get(slug=self.kwargs['slug'])
         queryset = Product.objects.filter(brand=brand)
