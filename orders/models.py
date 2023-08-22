@@ -36,6 +36,7 @@ class OrderDetail(models.Model):
     price = models.FloatField()
     quantity = models.IntegerField()
     total = models.FloatField()
+    
     def __str__(self):
         return str(self.order)
     
@@ -44,8 +45,13 @@ class OrderDetail(models.Model):
 class Cart(models.Model):
     user = models.ForeignKey(User,related_name='user_cart' , on_delete=models.SET_NULL , null=True , blank=True)
     completed = models.BooleanField(default=False)
-    def __str__(self):
-        return str(self.user)
+    
+    #instance method
+    def cart_total(self):
+        total = 0
+        for product in self.cart_detail.all():
+            total += product.total
+        return total    
 
     
     
