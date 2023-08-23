@@ -8,6 +8,11 @@ class OrderList(ListView):
     model = Order            #object_list    order_list
    
    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(user=self.request.user)
+        return queryset
+   
 def add_to_cart(request):
     
     # get data frontend
