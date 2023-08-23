@@ -34,8 +34,8 @@ class OrderDetail(models.Model):
     order = models.ForeignKey(Order,related_name='order_detail' , on_delete=models.CASCADE)
     product = models.ForeignKey(Product, related_name='order_product', on_delete=models.SET_NULL ,null=True)
     price = models.FloatField()
-    quantity = models.IntegerField()
-    total = models.FloatField()
+    quantity = models.IntegerField(default=1)
+    total = models.FloatField(default=0)
     
     def __str__(self):
         return str(self.order)
