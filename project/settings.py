@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'taggit',
     'django_summernote',
     "debug_toolbar",
-    
+    'rest_framework',
     # my apps 
     'products' ,
     'settings' ,
