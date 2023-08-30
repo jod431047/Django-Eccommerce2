@@ -7,11 +7,11 @@ from products.serializers import BrandSerializer
 
 
 
-@api_view(['GET'])
+""" @api_view(['GET'])
 def product_list_api(request):            #list
     queryset = Product.objects.all()[:10]            
     data = ProductSerializer(queryset,many=True,context={'request':request}).data   #the list to jason data of products
-    return Response ({'data':data})
+    return Response ({'data':data}) """
 
 
 
@@ -20,6 +20,22 @@ def product_detail_api(request,product_id):
     queryset = Product.objects.get(id=product_id)
     data = ProductSerializer(queryset,context={'request':request}).data   
     return Response ({'data':data})
+
+
+class ProductListAPI(generics.ListAPIView):
+    queryset = Product.objects.all()[:10]
+    serializer_class = ProductSerializer 
+
+
+
+
+
+class ProductDetailAPI(generics.RetrieveAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer 
+
+
+
 
 
 class BrandListAPI(generics.ListAPIView):
