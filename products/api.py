@@ -10,3 +10,11 @@ def product_list_api(request):            #list
     queryset = Product.objects.all()[:10]            
     data = ProductSerializer(queryset,many=True).data   #the list to jason data of products
     return Response ({'data':data})
+
+
+
+@api_view(['GET'])
+def product_detail_api(request,product_id):
+    queryset = Product.objects.get(id=product_id)
+    data = ProductSerializer(queryset).data   
+    return Response ({'data':data})
