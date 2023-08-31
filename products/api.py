@@ -15,12 +15,12 @@ def product_list_api(request):            #list
 
 
 
-@api_view(['GET'])
+""" @api_view(['GET'])
 def product_detail_api(request,product_id):
     queryset = Product.objects.get(id=product_id)
     data = ProductSerializer(queryset,context={'request':request}).data   
     return Response ({'data':data})
-
+ """
 
 class ProductListAPI(generics.ListAPIView):
     queryset = Product.objects.all()[:10]
@@ -30,7 +30,7 @@ class ProductListAPI(generics.ListAPIView):
 
 
 
-class ProductDetailAPI(generics.RetrieveAPIView):
+class ProductDetailAPI(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer 
 
@@ -41,3 +41,10 @@ class ProductDetailAPI(generics.RetrieveAPIView):
 class BrandListAPI(generics.ListAPIView):
     queryset = Brand.objects.all()
     serializer_class = BrandSerializer 
+    
+    
+    
+class BrandDetailAPI(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Brand.objects.all()
+    serializer_class = BrandSerializer 
+   
