@@ -37,6 +37,7 @@ class Product(models.Model):
     def save(self, *args ,**kwargs):
         self.slug = slugify (self.name)
         super(Product,self).save( *args ,**kwargs)
+        
     def get_avg_rate(self):
         avg = self.product_review.aggregate(avg=Avg('rate'))
         return avg
