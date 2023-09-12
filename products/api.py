@@ -22,7 +22,7 @@ def product_detail_api(request,product_id):
     return Response ({'data':data})
  """
 
-class ProductListAPI(generics.ListCreateAPIView):
+class ProductListAPI(generics.ListAPIView):
     queryset = Product.objects.all()[:10]
     serializer_class = ProductSerializer 
 
@@ -30,7 +30,7 @@ class ProductListAPI(generics.ListCreateAPIView):
 
 
 
-class ProductDetailAPI(generics.RetrieveUpdateDestroyAPIView):
+class ProductDetailAPI(generics.RetrieveAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer 
 
@@ -44,7 +44,7 @@ class BrandListAPI(generics.ListAPIView):
     
     
     
-class BrandDetailAPI(generics.RetrieveUpdateDestroyAPIView):
+class BrandDetailAPI(generics.RetrieveAPIView):
     queryset = Brand.objects.all()
     serializer_class = BrandDetailSerializer
    
