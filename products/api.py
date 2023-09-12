@@ -8,6 +8,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 from .filters import ProductFilter
 from .pagination import MyPagination
+from rest_framework.permissions import IsAuthenticated
 
 
 
@@ -38,12 +39,13 @@ class ProductListAPI(generics.ListAPIView):
     #ordering_fields = ['price', 'flag']
     #filter_backends = [filters.OrderingFilter]
     pagination_class = MyPagination
-
+    permission_classes = [IsAuthenticated]
 
 
 class ProductDetailAPI(generics.RetrieveAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer 
+    permission_classes = [IsAuthenticated]
 
 
 
