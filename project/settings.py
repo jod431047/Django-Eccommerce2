@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django_filters',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
+    'dj_rest_auth',
     
     'taggit',
     'django_summernote',
@@ -179,3 +180,8 @@ SIMPLE_JWT = {
    "REFRESH_TOKEN_LIFETIME": timedelta(days=20),
     
 }    
+
+REST_AUTH = {
+    'USE_JWT': True,
+    'JWT_AUTH_COOKIE': 'jwt-auth',
+}
