@@ -28,4 +28,10 @@ class CartDetailCreateDeleteAPI(generics.GenericAPIView):
         return Response({'status':200 , 'message':'product was added successfully'})
     
     def delete(self,request,*args,**kwargs):
-        pass
+        user = User.objects.get(username=self.kwargs['username'])
+        cart ,created = Cart.objects.get(user=user,completed=False)
+        product = Product.objects.get(id=request.data['product_id'])
+        
+        cart_detail = CartDetail.objects.get(Cart=cart , product=Product)
+        cart_detail.delete()
+        return Response({'status':200 , 'message':'product was deleted successfully'})
