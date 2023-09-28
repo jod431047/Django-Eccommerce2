@@ -51,7 +51,8 @@ INSTALLED_APPS = [
     'products' ,
     'settings' ,
     'orders' ,
-    'rosetta'
+    'rosetta',
+    'tof',
     
 ]
 
