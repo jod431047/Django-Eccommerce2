@@ -191,4 +191,5 @@ LOCALE_PATHS = ['locale']
 LANGUAGES = [
     ("de", ("German")),
     ("en", ("English")),
+    ("ar", ("Arabic")),
 ]

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-27 21:23+0200\n"
+"POT-Creation-Date: 2023-09-28 18:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,45 +18,46 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
 #: .\products\models.py:20
 msgid "Name"
-msgstr ""
+msgstr "الاسم"
 
 #: .\products\models.py:21
 msgid "description"
-msgstr ""
+msgstr "الوصف"
 
 #: .\products\models.py:22
 msgid "sku"
-msgstr ""
+msgstr "الكمية"
 
 #: .\products\models.py:23
 msgid "price"
-msgstr ""
+msgstr "السعر"
 
 #: .\products\models.py:24
 msgid "subtitle"
-msgstr ""
+msgstr "وصف ثانوي"
 
 #: .\products\models.py:25
 msgid "brand"
-msgstr ""
+msgstr "الماركة"
 
 #: .\products\models.py:26 .\products\models.py:50 .\products\models.py:58
 msgid "image"
-msgstr ""
+msgstr "الصورة"
 
 #: .\products\models.py:27
 msgid "flag"
-msgstr ""
+msgstr "النوعية"
 
 #: .\products\models.py:49 .\products\models.py:94
 msgid "product"
-msgstr ""
+msgstr "المنتج"
 
 #: .\products\models.py:57
 msgid "name"
-msgstr ""
+msgstr "اسم المنتج"
 
 #: .\products\models.py:93
 msgid "user"
@@ -64,12 +65,28 @@ msgstr ""
 
 #: .\products\models.py:95
 msgid "review"
-msgstr ""
+msgstr "الاراء"
 
 #: .\products\models.py:96
 msgid "rate"
-msgstr ""
+msgstr "معدل"
 
 #: .\products\models.py:97
 msgid "create date"
-msgstr ""
+msgstr "تاريخ الانشاء"
+
+#: .\templates\base.html:177
+msgid "Home"
+msgstr "الصفحة الرئيسية"
+
+#: .\templates\base.html:181
+msgid "Shop"
+msgstr "تسوق الان"
+
+#: .\templates\base.html:185
+msgid "Brands"
+msgstr "ماراكات"
+
+#: .\templates\base.html:188
+msgid "Orders"
+msgstr "الطلبات"
