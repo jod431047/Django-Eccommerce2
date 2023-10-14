@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
     'dj_rest_auth',
+    "django_bootstrap5",
     
     'taggit',
     'django_summernote',
