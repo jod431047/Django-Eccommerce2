@@ -25,6 +25,8 @@ class Order(models.Model):
     delivery_time = models.DateTimeField(null=True , blank=True)
     delivery_location = models.ForeignKey(Address,related_name='delivery_address', on_delete=models.SET_NULL, null=True)
     
+    coupon = models.ForeignKey('Coupon',related_name='order_coupon',on_delete=models.SET_NULL ,null=True,blank=True)
+    total_with_coupon = models.FloatField(null=True,blank=True)
     def __str__(self):
         return self.code
     
@@ -44,6 +46,12 @@ class OrderDetail(models.Model):
 class Cart(models.Model):
     user = models.ForeignKey(User,related_name='user_cart' , on_delete=models.SET_NULL , null=True , blank=True)
     completed = models.BooleanField(default=False)
+    
+    
+    coupon = models.ForeignKey('Coupon',related_name='cart_coupon',on_delete=models.SET_NULL ,null=True,blank=True)
+    total_with_coupon = models.FloatField(null=True,blank=True)
+    
+    
     def __str__(self):
         return str(self.user)
 
@@ -70,8 +78,8 @@ class CartDetail(models.Model):
 class Coupon(models.Model):
     code = models.CharField(max_length=30)
     percentage = models.FloatField()
-    start_date = models.DateTimeField(default=timezone.now)
-    end_date = models.DateTimeField(default=timezone.now)
+    start_date = models.DateField(default=timezone.now)
+    end_date = models.DateField(default=timezone.now)
     quantity = models.IntegerField()
     def __str__(self):
         return self.code
