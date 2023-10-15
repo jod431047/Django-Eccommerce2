@@ -5,13 +5,12 @@ from products.models import Product
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class OrderList(LoginRequiredMixin,ListView):
-    model = Order            #object_list    order_list
+class OrderList(LoginRequiredMixin, ListView):
+    model = Order
     paginate_by = 1
-   
     def get_queryset(self):
-        queryset = super().get_queryset()
-        queryset = queryset.filter(user=self.request.user)
+        queryset = super().get_queryset()    # return all orders
+        queryset = queryset.filter(user=self.request.user) # filter the current user
         return queryset
    
 def checkout_page(request):
@@ -22,32 +21,16 @@ def checkout_page(request):
    
    
    
-   
-   
+ 
 def add_to_cart(request):
-    
-    # get data frontend
+    # get data from frontend
     product = Product.objects.get(id=request.POST['product_id'])
-    quantity = request.POST['quantity']  
-    
-    #get cart
-    cart = Cart.objects.get(user=request.user,completed=False) 
-    
-    #cart detail
+    quantity = request.POST['quantity']
+    # get cart data
+    cart = Cart.objects.get(user=request.user,completed=False)
     cart_detail , created = CartDetail.objects.get_or_create(cart=cart , product=product)
     cart_detail.quantity = quantity
     cart_detail.price = product.price
     cart_detail.total = round(int(quantity) * product.price,2)
     cart_detail.save()
-    
     return redirect(f'/products/{product.slug}')
-        #cart detail
-    #cart_detail , created = CartDetail.objects.get_or_create(cart=cart , product=product)
-    #if created :
-        #cart_detail.quantity = quantity
-    #else:
-        #cart_detail.quantity += quantity
-        
-    #cart_detail.price = product.price
-    #cart_detail.total = int(quantity) * product.price
-    #cart_detail.save()

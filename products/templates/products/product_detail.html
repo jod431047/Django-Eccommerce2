@@ -1,13 +1,13 @@
-{% extends 'base.html' %}
+{% extends 'base.html'  %}
 {% load static %}
 
 
-{% block css%}
-<link rel="stylesheet" href="{% static 'ltr/css/product-details.css' %}">
+{% block css %}
+    <link rel="stylesheet" href="{% static 'ltr/css/product-details.css' %}">
 {% endblock css %}
 
-
 {% block body %}
+
         <!--=====================================
                     BANNER PART START
         =======================================-->
@@ -39,14 +39,15 @@
                                 <label class="details-label off">-10%</label>
                             </div>
                             <ul class="details-preview"> 
-                                {% for image  in object.product_images.all %}
-                                    <li><img src="{{image.image.url}}" alt="product"></li>
-                                {% endfor %}         
+                                {% for image in object.product_images.all %}
+                                <li><img src="{{image.image.url}}" alt="product"></li>
+                                {% endfor %}
+                                
                             </ul>
                             <ul class="details-thumb">
-                                {% for image  in object.product_images.all %}
+                                {% for image in object.product_images.all %}
                                 <li><img src="{{image.image.url}}" alt="product"></li>
-                            {% endfor %}  
+                                {% endfor %}
                             </ul>
                         </div>
                     </div>
@@ -63,13 +64,13 @@
                                 <i class="active icofont-star"></i>
                                 <i class="active icofont-star"></i>
                                 <i class="icofont-star"></i>
-                                <a href="#">(3 reviews)</a>
+                                <a href="#"></a>
                             </div>
                             <h3 class="details-price">
                                 
-                                <span>${{object.price}}<small>/per kilo</small></span>
+                                <span>${{object.price}}</span>
                             </h3>
-                            <p class="details-desc">{{object.subtitel|safe}}</p>
+                            <p class="details-desc">{{object.subtitle|safe}}</p>
                             <div class="details-list-group">
                                 <label class="details-list-title">tags:</label>
                                 <ul class="details-tag-list">
@@ -88,9 +89,8 @@
                                 </ul>
                             </div>
                             <div class="details-add-group row">
-                                <form action="/orders/add-to-cart" method="post">
+                                <form action="/orders/add_to_cart" method="post">
                                     {% csrf_token %}
-
                                     <div class="col-lg-5">
                                         <input title="Quantity Number" type="text" name="quantity" value="1">
                                         <input type="hidden" name="product_id" value="{{object.id}}">
@@ -108,6 +108,10 @@
                                     <i class="icofont-heart"></i>
                                     <span>add to wish</span>
                                 </a>
+                                <a class="details-compare" href="compare.html" title="Compare This Item">
+                                    <i class="fas fa-random"></i>
+                                    <span>Compare This</span>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -121,9 +125,7 @@
 
         <!--=====================================
                   PRODUCT TAB PART START
-    
-
-      =======================================-->
+        =======================================-->
         <section class="inner-section">
             <div class="container">
                 <div class="row">
@@ -135,7 +137,7 @@
                             </div>
                         </div>
                         <div class="product-details-frame">
-                            <h3 class="frame-title">Reviews({{object.product_review.all|length}})</h3>
+                            <h3 class="frame-title">Reviews ({{object.product_review.all|length}})</h3>
                             <ul class="review-list">
                                 {% for review in object.product_review.all %}
                                 <li class="review-item">
@@ -147,6 +149,7 @@
                                             <a href="#">{{review.user}}</a>
                                             <span>June 02, 2020</span>
                                             <span>{{review.create_date}}</span>
+
                                         </h5>
                                     </div>
                                     <ul class="review-rating">
@@ -157,8 +160,10 @@
                                         <li class="icofont-ui-{% if review.rate > 4 %}rating{% else %}rate-blank{% endif %}"></li>
                                     </ul>
                                     <p class="review-desc">{{review.review}}</p>
+                                    
                                 </li>
                                 {% endfor %}
+                                
                             </ul>
                         </div>
                         <div class="product-details-frame">
@@ -690,7 +695,3 @@
         =======================================-->
 
         {% endblock body %}
-
-
-
-
