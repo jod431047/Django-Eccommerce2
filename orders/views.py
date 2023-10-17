@@ -85,4 +85,12 @@ def add_to_cart(request):
     cart_detail.price = product.price
     cart_detail.total = round(int(quantity) * product.price,2)
     cart_detail.save()
-    return redirect(f'/products/{product.slug}')
+   
+    cart = Cart.objects.get(user=request.user,completed=False)
+    detail = CartDetail.objects.filter(cart=cart)
+    
+    
+    total = f"{cart.cart_total()}$"
+   
+    html = render_to_string('include/base_sidebar.html',{'cart_data':cart , 'cart_detail_data':cart_detail , request:request})
+    return JsonResponse({'result':html , 'total':cart.cart_total()})
