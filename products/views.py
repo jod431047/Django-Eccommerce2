@@ -11,16 +11,25 @@ from django.template.loader import render_to_string
 from django.views.decorators.cache import cache_page
 from django.utils.decorators import method_decorator
 
+
+from . tasks import send_m_email
+
 @cache_page(60 * 1)
 def post_list_debug(request):
     
     
     
-  
+    send_m_email.dalay()
     
     
     data = Product.objects.all()
+    
+    
+    
+    
     return render(request,'products/debug.html' ,{'data':data})
+   
+    #send email 1m user
 
 @method_decorator(cache_page(60 * 5), name='dispatch')
 class ProductList(generic.ListView):
@@ -82,7 +91,7 @@ class BrandDetail(generic.ListView):
     
     
     
-      # data = Product.objects.all()
+    # data = Product.objects.all()
     #data = Product.objects.filter(price=20)
     #data = Product.objects.filter(price__gt=80)
     #data = Product.objects.filter(price__gte=80)
