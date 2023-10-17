@@ -5,6 +5,9 @@ from .models import Product , ProductImages , Brand,Review
 from django.db.models import Q ,F ,Value , Func
 from django.db.models.aggregates import Count,Avg,Sum,Min,Max
 
+from django.http import JsonResponse
+from django.template.loader import render_to_string
+
 
 
 def post_list_debug(request):
@@ -117,7 +120,13 @@ def add_review(request,slug):
         myform.user = request.user
         myform.product = product
         myform.save()
-        return redirect(f'/products/{product.slug}')
+        
+        
+        reviews = Review.objects.filter(product=product)
+        html = render_to_string('include/all_reviews.html',{'reviews':reviews , request:request})
+        return JsonResponse({'result':html})
+        
+        #return redirect(f'/products/{product.slug}')
     
     
 class BrandList(generic.ListView):
