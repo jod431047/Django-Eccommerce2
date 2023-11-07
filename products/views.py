@@ -12,14 +12,14 @@ from django.views.decorators.cache import cache_page
 from django.utils.decorators import method_decorator
 
 
-from . tasks import send_m_email
+
 
 @cache_page(60 * 1)
 def post_list_debug(request):
     
     
     
-    send_m_email.dalay()
+ 
     
     
     data = Product.objects.all()
